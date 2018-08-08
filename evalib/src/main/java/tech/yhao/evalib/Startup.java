@@ -9,59 +9,45 @@ import tech.yhao.evalib.dao.MybatisHelper;
 import tech.yhao.evalib.dao.UserMapper;
 import tech.yhao.evalib.model.ChoiceQuestion;
 import tech.yhao.evalib.model.ChoiceType;
+import tech.yhao.evalib.model.QuestionOption;
 import tech.yhao.evalib.model.User;
+import tech.yhao.evalib.service.UserService;
+import tech.yhao.evalib.service.UserServiceImpl;
 
 public class Startup {
 
 	public static void main(String[] args) throws Exception {
-		SqlSession session = MybatisHelper.getSession();
-		User user = testFindUserByName(session);
-		ChoiceQuestion question = testInsertChoiceQuestion(session, user);
-		testUpdateChoiceQuestion(session, question);
-		testDeleteChoiceQuestion(session, question);
-	}
+		UserService userService = new UserServiceImpl();
+		User user = new User();
+		user.setName("jacky");
+		user.setDescription("Jacky Chen");
+		userService.registerUser(user);
+		
+		User userGot = userService.getUser(user.getId());
+	}	
 
-	private static User testFindUserByName(SqlSession session) {
-		UserMapper userMapper = session.getMapper(UserMapper.class);
-		User user = userMapper.findByName("admin");
-
-		if (user != null) {
-			System.out.println(user.getDescription());
-			System.out.println(user.getCreatedAt());
-		}
-
-		return user;
-	}
-
-	private static ChoiceQuestion testInsertChoiceQuestion(SqlSession session, User user) {
+	private ChoiceQuestion getChoiceQuestion() {
 		ChoiceQuestion question = new ChoiceQuestion();
-		question.setChoiceType(ChoiceType.MULTIPLE);
-		question.setDescription("地球公转一周时间时多久？");
-		question.setCreatedBy(user.getId());
+		question.setChoiceType(ChoiceType.SINGLE);
+		question.setDescription("地球自转周期是多久？");
 
-		Date now = new Date();
-		question.setCreatedAt(now);
-		question.setUpdatedAt(now);
+		QuestionOption option = new QuestionOption();
+		option.setDescription("1天");
 
-		ChoiceQuestionMapper mapper = session.getMapper(ChoiceQuestionMapper.class);
-		mapper.insert(question);
-		session.commit();
+		question.addOption(option);
 
-		System.out.println(question.getId());
+		option = new QuestionOption();
+		option.setDescription("365天");
+		question.addOption(option);
+
+		option = new QuestionOption();
+		option.setDescription("1个月");
+		question.addOption(option);
+		
+		option = new QuestionOption();
+		option.setDescription("1个季度");
+		question.addOption(option);
+		
 		return question;
-	}
-
-	private static ChoiceQuestion testUpdateChoiceQuestion(SqlSession session, ChoiceQuestion question) {
-		question.setDescription("地球自转一周需要多久？");
-		ChoiceQuestionMapper mapper = session.getMapper(ChoiceQuestionMapper.class);
-		mapper.update(question);
-		session.commit();
-		return question;
-	}
-
-	private static void testDeleteChoiceQuestion(SqlSession session, ChoiceQuestion question) {
-		ChoiceQuestionMapper mapper = session.getMapper(ChoiceQuestionMapper.class);
-		mapper.delete(question.getId());
-		session.commit();
 	}
 }

@@ -1,13 +1,16 @@
 package tech.yhao.evalib.model;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ChoiceQuestion extends Entity {
 
 	private ChoiceType choiceType;
 	private String description;
 
-	private List<QuestionOption> options;
+	private final List<QuestionOption> options = new ArrayList<QuestionOption>();
 
 	public ChoiceType getChoiceType() {
 		return choiceType;
@@ -25,11 +28,17 @@ public class ChoiceQuestion extends Entity {
 		this.description = description;
 	}
 
-	public List<QuestionOption> getOptions() {
-		return options;
+	public Set<QuestionOption> getOptions() {
+		return new HashSet<QuestionOption>(this.options);
 	}
 
-	public void setOptions(List<QuestionOption> options) {
-		this.options = options;
+	public void addOption(QuestionOption option) {
+		this.options.add(option);
+	}
+
+	public void removeOption(QuestionOption option) {
+		if (this.options.contains(option)) {
+			this.options.remove(option);
+		}
 	}
 }

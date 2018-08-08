@@ -9,6 +9,15 @@
 		updatedAt
 	</sql>
 
+	<insert id="insert" parameterType="User" useGeneratedKeys="true"
+		keyProperty="id" keyColumn="id">
+		insert into t_user(name,
+		description,
+		created_at, updated_at)
+		values(#{name}, #{description},
+		now(), now())
+	</insert>
+
 	<select id="findById" parameterType="uuid" resultType="User">
 		select
 		<include refid="userColumns"></include>
