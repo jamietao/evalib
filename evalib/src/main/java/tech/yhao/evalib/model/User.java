@@ -1,7 +1,11 @@
 package tech.yhao.evalib.model;
 
-public class User extends Entity {
+import java.io.Serializable;
 
+public class User extends Entity implements Serializable {
+	
+	private static final long serialVersionUID = 4840986371198597283L;
+	
 	private String name;
 	private String description;
 

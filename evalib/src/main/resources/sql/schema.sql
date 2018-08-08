@@ -1,4 +1,4 @@
--- add the UUID generate extension. 
+﻿-- add the UUID generate extension. 
 create extension if not exists "uuid-ossp";
 
 -- create the user table: used to store the system users registered.
@@ -8,8 +8,8 @@ create table t_user
    id uuid default uuid_generate_v4(),
    name character varying(50) not null,
    description character varying(100), 
-   created_at time without time zone not null default now(),
-   updated_at time without time zone not null default now(),
+   created_at timestamp without time zone not null default now(),
+   updated_at timestamp without time zone not null default now(),
 
    constraint pk_user primary key(id)
 );
@@ -21,8 +21,8 @@ create table t_evaluation
    id uuid default uuid_generate_v4(),
    name character varying(50) not null,
    description character varying(100), 
-   created_at time without time zone not null default now(),
-   updated_at time without time zone not null default now(),
+   created_at timestamp without time zone not null default now(),
+   updated_at timestamp without time zone not null default now(),
    created_by uuid not null,
 
    constraint pk_evaluation primary key(id),
@@ -36,8 +36,8 @@ create table t_choice_question
    id uuid default uuid_generate_v4(),
    description character varying(500) not null,
    choice_type smallint not null,  -- 0: single choice, 1: multiple choice. 
-   created_at time without time zone not null default now(),
-   updated_at time without time zone not null default now(),
+   created_at timestamp without time zone not null default now(),
+   updated_at timestamp without time zone not null default now(),
    created_by uuid not null,
 
    constraint pk_choicequestion primary key(id)
@@ -50,8 +50,8 @@ create table t_choice_question_option
     id uuid default uuid_generate_v4(),
     choice_question_id uuid not null,
     description character varying(100) not null,
-    created_at time without time zone not null default now(), 
-    updated_at time without time zone not null default now(),
+    created_at timestamp without time zone not null default now(), 
+    updated_at timestamp without time zone not null default now(),
     created_by uuid not null,
 
     constraint pk_choicequestionoption primary key(id),
