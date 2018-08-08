@@ -1,4 +1,4 @@
-﻿-- add the UUID generate extension. 
+-- add the UUID generate extension. 
 create extension if not exists "uuid-ossp";
 
 -- create the user table: used to store the system users registered.
@@ -11,7 +11,8 @@ create table t_user
    created_at timestamp without time zone not null default now(),
    updated_at timestamp without time zone not null default now(),
 
-   constraint pk_user primary key(id)
+   constraint pk_user primary key(id),
+   constraint uq_user_name unique(name)
 );
 
 -- create the evaluation table: used to store the evaluation user created. 
@@ -40,7 +41,8 @@ create table t_choice_question
    updated_at timestamp without time zone not null default now(),
    created_by uuid not null,
 
-   constraint pk_choicequestion primary key(id)
+   constraint pk_choicequestion primary key(id),
+   constraint fk_choicequestion_user foreign key(created_by) references t_user(id)
 );
 
 -- create table t_question_option: used to store the options for choice type question.
@@ -55,6 +57,7 @@ create table t_choice_question_option
     created_by uuid not null,
 
     constraint pk_choicequestionoption primary key(id),
+    constraint fk_choicequestionoption_user foreign key(created_by) references t_user(id),
     constraint fk_choicequestionoption_choicequestion foreign key(choice_question_id) references t_choice_question(id)
 );
 

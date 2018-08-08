@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tech.yhao.evalib.dao.ChoiceQuestionMapper">
+
+	<insert id="insert" parameterType="ChoiceQuestion"
+		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into
+		t_choice_question(description, choice_type, created_at,
+		updated_at,
+		created_by)
+		values(#{description}, #{choiceType},
+		now(),
+		now(),
+		#{createdBy})
+	</insert>
+
+	<delete id="delete" parameterType="uuid">
+		delete from t_choice_question
+		where id=#{id}
+	</delete>
+
+	<update id="update" parameterType="ChoiceQuestion">
+		update t_choice_question set
+		description=#{description},
+		choice_type=#{choiceType},
+		updated_at=now()
+		where id=#{id}
+	</update>
+</mapper>
