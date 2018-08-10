@@ -7,3 +7,8 @@
 
 ### Issues and Solution
 1. SpringBoot cannot server static file - Missing @EnableAutoConfiguration attribute in Application class. 
+
+## Installation
+1. Create a database named evalib. Currently it only support postgresql. 
+2. Run the sql\schema.sql file to create the required tables.
+3. Run teh sql\init_data.sql to insert the intilize data.
