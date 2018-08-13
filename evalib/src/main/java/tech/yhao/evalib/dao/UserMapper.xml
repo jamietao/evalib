@@ -18,6 +18,12 @@
 		now(), now())
 	</insert>
 
+	<select id="listAll" resultType="User">
+		select
+		<include refid="userColumns"></include>
+		from t_user
+	</select>
+
 	<select id="findById" parameterType="uuid" resultType="User">
 		select
 		<include refid="userColumns"></include>
