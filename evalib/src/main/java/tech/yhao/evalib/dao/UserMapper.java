@@ -9,6 +9,8 @@ public interface UserMapper {
 	
 	int insert(User user);
 	
+	int delete(UUID id);
+	
 	List<User> listAll();
 	
 	User findById(UUID id);

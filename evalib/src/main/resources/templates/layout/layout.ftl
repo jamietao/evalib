@@ -27,15 +27,18 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
 	integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
 	crossorigin="anonymous">
+
+<link rel="stylesheet"
+	href="${springMacroRequestContext.contextPath}/static/css/site.css">
 </head>
 
 <body>
 	<div class="container-fluid">
 		<div class="bg-dark p-4 text-light">
 			<a href="${springMacroRequestContext.contextPath}/user/"
-				class="text-light float-right d-block" style="width:80px;">Users</a>  <a
-				href="${springMacroRequestContext.contextPath}/user/register"
-				class="text-light float-right d-block" style="width:80px;">Register</a>
+				class="text-light float-right d-block" style="width: 80px;">Users</a>
+			<a href="${springMacroRequestContext.contextPath}/user/register"
+				class="text-light float-right d-block" style="width: 80px;">Register</a>
 		</div>
 	</div>
 

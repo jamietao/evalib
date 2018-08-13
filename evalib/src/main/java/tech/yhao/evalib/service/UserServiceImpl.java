@@ -29,6 +29,21 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	public void deleteUser(String userId) throws Exception {
+		SqlSession session = null;
+
+		try {
+			session = MybatisHelper.getSession();
+			UserMapper userMapper = session.getMapper(UserMapper.class);
+			userMapper.delete(UUID.fromString(userId));
+			session.commit();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	}
+
 	public User getUser(UUID userId) throws Exception {
 		SqlSession session = null;
 

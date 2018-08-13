@@ -18,6 +18,12 @@
 		now(), now())
 	</insert>
 
+
+	<insert id="delete" parameterType="uuid">
+		delete from t_user where
+		id=#{userId}
+	</insert>
+
 	<select id="listAll" resultType="User">
 		select
 		<include refid="userColumns"></include>
