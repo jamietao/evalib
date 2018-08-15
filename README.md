@@ -17,6 +17,6 @@
 4. Get the package generated and run command: java -jar <packageName>
   
 ### Issues and Solution
-[] SpringBoot cannot server static file - Missing @EnableAutoConfiguration attribute in Application class. 
-[] mybatis typealias registration use package works fine when debug in eclipse but it does not work when run from jar package. 
+- [] SpringBoot cannot server static file - Missing @EnableAutoConfiguration attribute in Application class. 
+- [] mybatis typealias registration use package works fine when debug in eclipse but it does not work when run from jar package. 
 
