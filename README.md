@@ -9,7 +9,7 @@
 1. SpringBoot cannot server static file - Missing @EnableAutoConfiguration attribute in Application class. 
 2. mybatis typealias registration use package works fine when debug in eclipse but it does not work when run from jar package. 
 
-#Build
+## Build
 1. Go to evalib-server folder
 2. Run maven command to generate the package: mvn clean package
 3. The package will be generated, and use the package located in evalib-server\evalib-web-admin\target.
