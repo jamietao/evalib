@@ -92,6 +92,25 @@
 	</dependencies>
 
 	<build>
+		<resources>
+			<!-- By default maven only includes the resources in src/main/resources 
+				folder. -->
+			<!-- The mapper xml file are defined in source folder, this plugin will 
+				package them. -->
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+		</resources>
+
 		<plugins>
 			<!-- Add build plugin to allow package the tests and resources. -->
 			<plugin>

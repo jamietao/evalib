@@ -11,13 +11,11 @@
 
 	<typeAliases>
 		<typeAlias alias="uuid" type="java.util.UUID" />
-		<package name="tech.yhao.evalib.core.model" />
+		<typeAlias alias="User" type="tech.yhao.evalib.core.model.User" />
 	</typeAliases>
 
 	<typeHandlers>
 		<typeHandler handler="tech.yhao.evalib.mybatis.type.UUIDTypeHandler" />
-		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler"
-			javaType="ChoiceType" />
 	</typeHandlers>
 
 	<mappers>
