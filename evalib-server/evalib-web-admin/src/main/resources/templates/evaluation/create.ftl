@@ -5,13 +5,13 @@
 <div class="row">
 	<div class="col-lg-12 col-md-12">
 		<div class="card">
-			<div class="card-header card-header-tabs card-header-warning">
+			<div class="card-header card-header-tabs card-header-info">
 				<div class="nav-tabs-navigation">
 					<div class="nav-tabs-wrapper">
-						<span class="nav-tabs-title">Users:</span>
+						<span class="nav-tabs-title">Evaluation:</span>
 						<ul class="nav nav-tabs" data-tabs="tabs">
 							<li class="nav-item"><a class="nav-link active float-right"
-								href="${springMacroRequestContext.contextPath}/user">
+								href="${springMacroRequestContext.contextPath}/evaluation">
 									<i class="material-icons">list</i> Back
 							</a></li>
 						</ul>
@@ -38,7 +38,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<button type="submit" class="btn btn-warning float-right">Create</button>
+							<button type="submit" class="btn btn-info float-right">Create</button>
 						</div>
 					</div>
 				</form>
@@ -49,4 +49,4 @@
 
 </#macro>
 
-<@display_page page_name="administration"/>
+<@display_page page_name="evaluation"/>

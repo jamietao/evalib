@@ -7,11 +7,13 @@
 	<properties resource="jdbc.properties"></properties>
 	<settings>
 		<setting name="logImpl" value="LOG4J" />
+		<setting name="defaultEnumTypeHandler" value="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
 	</settings>
 
 	<typeAliases>
 		<typeAlias alias="uuid" type="java.util.UUID" />
 		<typeAlias alias="User" type="tech.yhao.evalib.core.model.User" />
+		<typeAlias alias="Evaluation" type="tech.yhao.evalib.core.model.Evaluation" />
 	</typeAliases>
 
 	<typeHandlers>
@@ -20,5 +22,6 @@
 
 	<mappers>
 		<mapper resource="tech/yhao/evalib/mybatis/mapper/UserMapper.xml" />
+		<mapper resource="tech/yhao/evalib/mybatis/mapper/EvaluationMapper.xml" />
 	</mappers>
 </configuration>

@@ -56,7 +56,9 @@
 	<@script_section />
 	
 	<script>
-		var currentPage = '${page_name}';
+		$(function(){
+			$("li.nav-item[data-page='${page_name}']").addClass('active');
+		});	
 	</script>
 </body>
 </html>

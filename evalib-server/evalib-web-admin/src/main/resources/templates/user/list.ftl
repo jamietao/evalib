@@ -5,7 +5,7 @@
 <div class="row">
 	<div class="col-lg-12 col-md-12">
 		<div class="card">
-			<div class="card-header card-header-tabs card-header-primary">
+			<div class="card-header card-header-tabs card-header-warning">
 				<div class="nav-tabs-navigation">
 					<div class="nav-tabs-wrapper">
 						<span class="nav-tabs-title">Users:</span>
@@ -47,4 +47,4 @@
 
 </#macro>
 
-<@display_page page_name="user-list"/>
+<@display_page page_name="administration"/>

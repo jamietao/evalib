@@ -11,7 +11,7 @@
 	</div>
 	<div class="sidebar-wrapper">
 		<ul class="nav">
-			<li class="nav-item active" data-page="dashboard"><a class="nav-link"
+			<li class="nav-item" data-page="dashboard"><a class="nav-link"
 				href="${springMacroRequestContext.contextPath}/dashboard"> <i class="material-icons">dashboard</i>
 					<p>Dashboard</p>
 			</a></li>

@@ -38,7 +38,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ModelAndView register(UserRegistration user, Model model) {
+	public ModelAndView register(UserRegistration user) {
 		User newUser = new User();
 		newUser.setName(user.getName());
 		newUser.setDescription(user.getDescription());

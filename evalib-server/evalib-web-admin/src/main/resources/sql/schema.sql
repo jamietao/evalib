@@ -25,6 +25,7 @@ create table t_evaluation
    created_at timestamp without time zone not null default now(),
    updated_at timestamp without time zone not null default now(),
    created_by uuid not null,
+   state smallint not null,  -- 0: DRAFT, 1: AUDITING, 2: REJECTED, 3: APPROVED. 
 
    constraint pk_evaluation primary key(id),
    constraint fk_evaluation_user foreign key(created_by) references t_user(id)
