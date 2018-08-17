@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<context id="evalib-context">
+
+		<jdbcConnection connectionURL="jdbc:postgresql://127.0.0.1:5432/evalib"
+			driverClass="org.postgresql.Driver" password="Perkinelmer123" userId="postgres" />
+
+		<javaModelGenerator targetPackage="tech.yhao.evalib.core.model"
+			targetProject="./generation-output/" />
+
+		<sqlMapGenerator targetPackage="tech.yhao.evalib.mybatis.mapper"
+			targetProject="./generation-output/" />
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="tech.yhao.evalib.core.dao" targetProject="./generation-output/">
+		</javaClientGenerator>
+
+		<table schema="public" tableName="%" enableDeleteByExample="false"
+			enableCountByExample="false" enableUpdateByExample="false"
+			selectByPrimaryKeyQueryId="false" selectByExampleQueryId="false">
+			<columnOverride column="id" javaType="java.util.UUID"></columnOverride>
+		</table>
+
+	</context>
+</generatorConfiguration>
