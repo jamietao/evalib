@@ -1,0 +1,1 @@
+This folder store the files of SPA scripts and other html resources.

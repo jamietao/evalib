@@ -4,17 +4,10 @@
 <#macro script_section> <!--   Core JS Files   --> <script
 	src="${springMacroRequestContext.contextPath}/static/js/core/jquery.min.js"
 	type="text/javascript"></script> <script
-	src="${springMacroRequestContext.contextPath}/static/js/core/popper.min.js"
-	type="text/javascript"></script> <script
 	src="${springMacroRequestContext.contextPath}/static/js/core/bootstrap-material-design.min.js"
-	type="text/javascript"></script> <script
-	src="${springMacroRequestContext.contextPath}/static/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-<!--  Notifications Plugin    --> <script
-	src="${springMacroRequestContext.contextPath}/static/js/plugins/bootstrap-notify.js"></script>
-<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-</#macro>
+	type="text/javascript"></script> </#macro>
 
-<#macro display_page page_name> <!DOCTYPE html>
+<#macro display_page> <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -29,8 +22,6 @@
 <!--     Fonts and icons     -->
 <link rel="stylesheet" type="text/css"
 	href="${springMacroRequestContext.contextPath}/static/css/google-material-icon.css" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 <!-- CSS Files -->
 <link
 	href="${springMacroRequestContext.contextPath}/static/css/material-site.css?v=2.1.0"
@@ -39,27 +30,20 @@
 
 <body>
 	<div class="wrapper ">
-		<#include "./sidebar.ftl"/>
 
 		<div class="main-panel">
-			<#include "./navbar.ftl"/>
+			<#include "./layout/navbar.ftl"/>
 
 			<!-- End Navbar -->
 			<div class="content">
-				<div class="container-fluid"><@page_body /></div>
+				<div class="container-fluid">Enjoy Evaluation</div>
 			</div>
 
-			<#include "./footer.ftl"/>
+			<#include "./layout/footer.ftl"/>
 		</div>
 	</div>
-
-	<@script_section />
-	
-	<script>
-		$(function(){
-			$("li.nav-item[data-page='${page_name}']").addClass('active');
-		});	
-	</script>
 </body>
 </html>
 </#macro>
+
+<@display_page />

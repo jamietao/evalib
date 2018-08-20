@@ -17,7 +17,7 @@ import tech.yhao.evalib.core.model.User;
 import tech.yhao.evalib.core.service.UserService;
 import tech.yhao.evalib.web.admin.dto.UserRegistration;
 
-@RequestMapping("/user")
+@RequestMapping("/admin/user")
 @Controller
 public class UserController {
 

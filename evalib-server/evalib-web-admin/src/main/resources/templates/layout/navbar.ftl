@@ -45,7 +45,7 @@
 							Andrew</a> <a class="dropdown-item" href="#">Another Notification</a>
 						<a class="dropdown-item" href="#">Another One</a>
 					</div></li>
-				<li class="nav-item"><a class="nav-link" href="#pablo"> <i
+				<li class="nav-item"><a class="nav-link" href="${springMacroRequestContext.contextPath}/login.html"> <i
 						class="material-icons">person</i>
 						<p class="d-lg-none d-md-block">Account</p>
 				</a></li>

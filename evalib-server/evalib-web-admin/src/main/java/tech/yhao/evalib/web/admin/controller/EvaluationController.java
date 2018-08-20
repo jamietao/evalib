@@ -13,7 +13,7 @@ import tech.yhao.evalib.core.model.Evaluation;
 import tech.yhao.evalib.core.service.EvaluationService;
 import tech.yhao.evalib.web.admin.dto.EvaluationCreationParam;
 
-@RequestMapping("/evaluation")
+@RequestMapping("/admin/evaluation")
 @Controller
 public class EvaluationController {
 
