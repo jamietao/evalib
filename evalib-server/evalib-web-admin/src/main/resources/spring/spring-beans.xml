@@ -28,7 +28,7 @@
 	<!-- MapperScannerConfigurer：mapper的扫描器，将包下边的mapper接口自动创建代理对象 自动创建到spring容器中，bean的id是mapper的类名（首字母小写） -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 配置扫描包路径 如果要扫描多个包，中间使用半角逗好隔开 -->
-		<property name="basePackage" value="tech.yhao.evalib.mybatis.mapper"></property>
+		<property name="basePackage" value="tech.yhao.evalib.core.dao"></property>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
 </beans>

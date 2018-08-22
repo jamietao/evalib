@@ -21,7 +21,7 @@
 	</typeHandlers>
 
 	<mappers>
-		<mapper resource="tech/yhao/evalib/mybatis/mapper/UserMapper.xml" />
-		<mapper resource="tech/yhao/evalib/mybatis/mapper/EvaluationMapper.xml" />
+		<mapper resource="tech/yhao/evalib/mybatis/mapper/UserDao.xml" />
+		<mapper resource="tech/yhao/evalib/mybatis/mapper/EvaluationDao.xml" />
 	</mappers>
 </configuration>

@@ -28,19 +28,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public void deleteUser(String userId) {
-		userDao.delete(UUID.fromString(userId));
+		userDao.deleteByPrimaryKey(UUID.fromString(userId));
 	}
 
 	public User getUser(UUID userId) {
-		return userDao.findById(userId);
-	}
-
-	public User getUser(String name) {
-		return userDao.findByName(name);
+		return userDao.selectByPrimaryKey(userId);
 	}
 
 	@Override
 	public List<User> getAll() {
-		return userDao.listAll();
+		return userDao.selectAll();
 	}
 }

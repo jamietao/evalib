@@ -32,7 +32,7 @@ public class EvaluationServiceImpl implements EvaluationService {
 	@Override
 	public Evaluation createEvaluation(Evaluation evaluation) {
 		// TODO: get the user from current request session. 
-		User admin = userDao.findByName("admin");
+		User admin = userDao.selectAll().get(0);
 		evaluation.setCreatedBy(admin.getId());
 		evaluation.setState(EvaluationState.DRAFT);
 		this.evaluationDao.insert(evaluation);
@@ -41,7 +41,7 @@ public class EvaluationServiceImpl implements EvaluationService {
 
 	@Override
 	public List<Evaluation> listAllEvaluations() {
-		return this.evaluationDao.listAll();
+		return this.evaluationDao.selectAll();
 	}
 
 	@Override

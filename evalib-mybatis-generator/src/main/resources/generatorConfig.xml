@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-	<context id="evalib-context">
+	<context id="evalib-context" targetRuntime="MyBatis3Simple">
 
 		<jdbcConnection connectionURL="jdbc:postgresql://127.0.0.1:5432/evalib"
 			driverClass="org.postgresql.Driver" password="Perkinelmer123" userId="postgres" />
@@ -16,11 +16,47 @@
 			targetPackage="tech.yhao.evalib.core.dao" targetProject="./generation-output/">
 		</javaClientGenerator>
 
-		<table schema="public" tableName="%" enableDeleteByExample="false"
-			enableCountByExample="false" enableUpdateByExample="false"
-			selectByPrimaryKeyQueryId="false" selectByExampleQueryId="false">
+		<table schema="public" tableName="t_user" domainObjectName="User"
+			mapperName="UserDao">
+			<columnOverride column="id" javaType="java.util.UUID"></columnOverride>
+			<columnOverride column="sex" javaType="Sex"></columnOverride>
+		</table>
+
+		<table schema="public" tableName="t_login" domainObjectName="Login"
+			mapperName="LoginDao">
+			<columnOverride column="id" javaType="java.util.UUID"></columnOverride>
+			<columnOverride column="state" javaType="ActivationState"></columnOverride>
+			<columnOverride column="user_id" javaType="java.util.UUID"></columnOverride>
+		</table>
+
+		<table schema="public" tableName="t_role" domainObjectName="Role"
+			mapperName="RoleDao">
 			<columnOverride column="id" javaType="java.util.UUID"></columnOverride>
 		</table>
 
+		<table schema="public" tableName="t_permission"
+			domainObjectName="Permission" mapperName="PermissionDao">
+			<columnOverride column="id" javaType="java.util.UUID"></columnOverride>
+		</table>
+
+		<table schema="public" tableName="t_evaluation"
+			domainObjectName="Evaluation" mapperName="EvaluationDao">
+			<columnOverride column="id" javaType="java.util.UUID"></columnOverride>
+			<columnOverride column="state" javaType="EvaluationState"></columnOverride>
+			<columnOverride column="created_by" javaType="java.util.UUID"></columnOverride>
+		</table>
+
+		<table schema="public" tableName="t_choice_question"
+			domainObjectName="ChoiceQuestion" mapperName="ChoiceQuestionDao">
+			<columnOverride column="id" javaType="java.util.UUID"></columnOverride>
+			<columnOverride column="choice_type" javaType="ChoiceType"></columnOverride>
+			<columnOverride column="created_by" javaType="java.util.UUID"></columnOverride>
+		</table>
+
+		<table schema="public" tableName="t_choice_question_option"
+			domainObjectName="ChoiceQuestionOption" mapperName="ChoiceQuestionOptionDao">
+			<columnOverride column="id" javaType="java.util.UUID"></columnOverride>
+			<columnOverride column="created_by" javaType="java.util.UUID"></columnOverride>
+		</table>
 	</context>
 </generatorConfiguration>

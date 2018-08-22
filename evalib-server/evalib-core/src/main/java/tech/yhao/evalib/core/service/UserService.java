@@ -14,6 +14,4 @@ public interface UserService {
 	List<User> getAll();
 
 	User getUser(UUID userId);
-
-	User getUser(String name);
 }
