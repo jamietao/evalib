@@ -11,7 +11,7 @@
 						<span class="nav-tabs-title">Users:</span>
 						<ul class="nav nav-tabs" data-tabs="tabs">
 							<li class="nav-item"><a class="nav-link active float-right"
-								href="${springMacroRequestContext.contextPath}/user">
+								href="${springMacroRequestContext.contextPath}/admin/user">
 									<i class="material-icons">list</i> Back
 							</a></li>
 						</ul>

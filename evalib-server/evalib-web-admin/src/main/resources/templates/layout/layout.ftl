@@ -1,6 +1,9 @@
 
 <#macro page_body></#macro>
 
+<#macro page_css></#macro>
+<#macro page_script></#macro>
+
 <#macro script_section> <!--   Core JS Files   --> <script
 	src="${springMacroRequestContext.contextPath}/static/js/core/jquery.min.js"
 	type="text/javascript"></script> <script
@@ -35,6 +38,8 @@
 <link
 	href="${springMacroRequestContext.contextPath}/static/css/material-site.css?v=2.1.0"
 	rel="stylesheet" />
+
+<@page_css />
 </head>
 
 <body>
@@ -53,12 +58,12 @@
 		</div>
 	</div>
 
-	<@script_section />
-	
+	<@script_section /> <@page_script />
+
 	<script>
-		$(function(){
+		$(function() {
 			$("li.nav-item[data-page='${page_name}']").addClass('active');
-		});	
+		});
 	</script>
 </body>
 </html>

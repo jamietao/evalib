@@ -1,14 +1,17 @@
 package tech.yhao.evalib.web.admin.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import tech.yhao.evalib.core.model.ChoiceQuestion;
 import tech.yhao.evalib.core.model.Evaluation;
 import tech.yhao.evalib.core.service.EvaluationService;
 import tech.yhao.evalib.web.admin.dto.EvaluationCreationParam;
@@ -35,11 +38,21 @@ public class EvaluationController {
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ModelAndView create(EvaluationCreationParam creationParam) {
-	    Evaluation evaluation = new Evaluation();
-	    evaluation.setName(creationParam.getName());
-	    evaluation.setDescription(creationParam.getDescription());
-	    this.evaluationService.createEvaluation(evaluation);
-	    
-		return new ModelAndView("redirect:/evaluation/");
+		Evaluation evaluation = new Evaluation();
+		evaluation.setName(creationParam.getName());
+		evaluation.setDescription(creationParam.getDescription());
+		this.evaluationService.createEvaluation(evaluation);
+
+		return new ModelAndView("redirect:/admin/evaluation/");
+	}
+
+	@RequestMapping(value = "/{evaluationId}")
+	public ModelAndView detail(@PathVariable("evaluationId") String evaluationId) {
+		Evaluation evaluation = this.evaluationService.getEvaluationWithQuestions(UUID.fromString(evaluationId));
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("evaluation", evaluation);
+		modelAndView.setViewName("/evaluation/detail");
+
+		return modelAndView;
 	}
 }

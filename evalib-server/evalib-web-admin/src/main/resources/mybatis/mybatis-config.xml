@@ -22,6 +22,7 @@
 
 	<mappers>
 		<mapper resource="tech/yhao/evalib/mybatis/mapper/UserDao.xml" />
+		<mapper resource="tech/yhao/evalib/mybatis/mapper/ChoiceQuestionDao.xml" />
 		<mapper resource="tech/yhao/evalib/mybatis/mapper/EvaluationDao.xml" />
 	</mappers>
 </configuration>

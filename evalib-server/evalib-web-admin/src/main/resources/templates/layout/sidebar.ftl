@@ -12,23 +12,22 @@
 	<div class="sidebar-wrapper">
 		<ul class="nav">
 			<li class="nav-item" data-page="dashboard"><a class="nav-link"
-				href="${springMacroRequestContext.contextPath}/dashboard"> <i class="material-icons">dashboard</i>
+				href="${springMacroRequestContext.contextPath}/admin/dashboard">
+					<i class="material-icons">dashboard</i>
 					<p>Dashboard</p>
 			</a></li>
 
 			<li class="nav-item" data-page="evaluation"><a class="nav-link"
-				href="${springMacroRequestContext.contextPath}/evaluation"> <i class="material-icons">content_paste</i>
+				href="${springMacroRequestContext.contextPath}/admin/evaluation">
+					<i class="material-icons">content_paste</i>
 					<p>Evaluation</p>
 			</a></li>
 
-			<li class="nav-item" data-page="administration"><a class="nav-link"
-				href="${springMacroRequestContext.contextPath}/user"> <i
+			<li class="nav-item" data-page="administration"><a
+				class="nav-link"
+				href="${springMacroRequestContext.contextPath}/admin/user"> <i
 					class="material-icons">person</i>
 					<p>Administration</p>
-			</a></li>
-			<li class="nav-item" data-page="notification"><a class="nav-link" href=""> <i
-					class="material-icons">notifications</i>
-					<p>Notifications</p>
 			</a></li>
 		</ul>
 	</div>

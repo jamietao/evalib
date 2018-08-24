@@ -44,4 +44,11 @@ public interface EvaluationDao {
      * @mbg.generated Wed Aug 22 13:45:02 CST 2018
      */
     int updateByPrimaryKey(Evaluation record);
+    
+    /**
+     * Select the {@link Evaluation} and with {@link ChoiceQuestion} list by the evaluation id.
+     * @param id : The evaluation id. 
+     * @return the {@link Evaluation} and with {@link ChoiceQuestion} list.
+     */
+    Evaluation selectByPrimaryKeyWithQuestionInfo(UUID id);
 }

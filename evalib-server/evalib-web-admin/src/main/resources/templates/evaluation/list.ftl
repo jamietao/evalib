@@ -1,7 +1,6 @@
 <#include "../layout/layout.ftl"/>
 
 <#macro page_body>
-
 <div class="row">
 	<div class="col-lg-12 col-md-12">
 		<div class="card">
@@ -11,7 +10,7 @@
 						<span class="nav-tabs-title">Evaluation:</span>
 						<ul class="nav nav-tabs" data-tabs="tabs">
 							<li class="nav-item"><a class="nav-link active float-right"
-								href="${springMacroRequestContext.contextPath}/evaluation/create">
+								href="${springMacroRequestContext.contextPath}/admin/evaluation/create">
 									<i class="material-icons">add</i> Create
 							</a></li>
 						</ul>
@@ -36,7 +35,8 @@
 							<td>${evaluation.createdAt?string["yyyy-MM-dd HH:mm:ss"]}</td>
 							<td>${evaluation.state}</td>
 							<td>${evaluation.description!}</td>
-							<td></td>
+							<td><a
+								href="${springMacroRequestContext.contextPath}/admin/evaluation/${evaluation.id}">View</a></td>
 						</tr>
 						</#list>
 					</tbody>

@@ -11,7 +11,7 @@
 						<span class="nav-tabs-title">Users:</span>
 						<ul class="nav nav-tabs" data-tabs="tabs">
 							<li class="nav-item"><a class="nav-link active float-right"
-								href="${springMacroRequestContext.contextPath}/user/register">
+								href="${springMacroRequestContext.contextPath}/admin/user/register">
 									<i class="material-icons">add</i> Create
 							</a></li>
 						</ul>
