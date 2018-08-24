@@ -13,29 +13,20 @@ import UserProfile from "views/UserProfile/UserProfile.jsx";
 import TableList from "views/TableList/TableList.jsx";
 import Typography from "views/Typography/Typography.jsx";
 import Icons from "views/Icons/Icons.jsx";
-import Maps from "views/Maps/Maps.jsx";
 import NotificationsPage from "views/Notifications/Notifications.jsx";
-import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.jsx";
 
 const dashboardRoutes = [
   {
     path: "/dashboard",
-    sidebarName: "Dashboard",
-    navbarName: "Material Dashboard",
+    sidebarName: "仪   表   盘",
+    navbarName: "仪   表   盘",
     icon: Dashboard,
     component: DashboardPage
   },
   {
-    path: "/user",
-    sidebarName: "User Profile",
-    navbarName: "Profile",
-    icon: Person,
-    component: UserProfile
-  },
-  {
     path: "/table",
-    sidebarName: "Table List",
-    navbarName: "Table List",
+    sidebarName: "题目管理",
+    navbarName: "题目管理",
     icon: "content_paste",
     component: TableList
   },
@@ -54,25 +45,18 @@ const dashboardRoutes = [
     component: Icons
   },
   {
-    path: "/maps",
-    sidebarName: "Maps",
-    navbarName: "Map",
-    icon: LocationOn,
-    component: Maps
-  },
-  {
     path: "/notifications",
-    sidebarName: "Notifications",
-    navbarName: "Notifications",
+    sidebarName: "系统通知",
+    navbarName: "系统通知",
     icon: Notifications,
     component: NotificationsPage
   },
   {
-    path: "/upgrade-to-pro",
-    sidebarName: "Upgrade To PRO",
-    navbarName: "Upgrade To PRO",
-    icon: Unarchive,
-    component: UpgradeToPro
+    path: "/user",
+    sidebarName: "用户管理",
+    navbarName: "用户管理",
+    icon: Person,
+    component: UserProfile
   },
   { redirect: true, path: "/", to: "/dashboard", navbarName: "Redirect" }
 ];
