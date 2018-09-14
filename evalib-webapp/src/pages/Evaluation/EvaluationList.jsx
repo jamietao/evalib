@@ -4,13 +4,14 @@ import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 // core components
 import GridItem from "components/Grid/GridItem.jsx";
-import { Grid, Zoom, Button, Paper, Tabs, Tab } from "@material-ui/core";
+import { Grid, Button, Paper, Tabs, Tab } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import green from "@material-ui/core/colors/green";
 import gray from "@material-ui/core/colors/grey";
-import CreationDialog from "./component/CreationDialog";
+import CreationOrEditDialog from "./component/CreationOrEditDialog";
 import EvaluationItem from "./component/EvaluationItem";
 import { connect } from "react-redux";
+import { deleteEvaluation } from "actions/actions.js";
 
 const styles = theme => ({
   evalContainer: {
@@ -32,7 +33,8 @@ class EvaluationList extends React.Component {
     super(props);
     this.state = {
       tabIndex: 0,
-      showCreationDialog: false
+      showCreationOrEditDialog: false,
+      evalItem: null,
     };
   }
 
@@ -41,11 +43,22 @@ class EvaluationList extends React.Component {
   };
 
   handleAdd = () => {
-    this.setState({ showCreationDialog: true });
+    this.setState({ showCreationOrEditDialog: true, evalItem: null });
   }
 
   handleDialogClose = () => {
-    this.setState({ showCreationDialog: false });
+    this.setState({ showCreationOrEditDialog: false });
+  }
+
+  handleDelete = (id) => {
+    this.props.onDelete(id);
+  }
+
+  handleEdit = (evalItem) => {
+    this.setState({
+      showCreationOrEditDialog: true,
+      evalItem
+    });
   }
 
   render() {
@@ -62,7 +75,10 @@ class EvaluationList extends React.Component {
           {
             this.props.evaluationList.map((item, index) => (
               <GridItem xs={6} sm={12} md={6} key={index}>
-                <EvaluationItem evalItem={item} />
+                <EvaluationItem
+                  evalItem={item}
+                  onDelete={() => this.handleDelete(item.id)}
+                  onEdit={() => this.handleEdit(item)} />
               </GridItem>
             ))
           }
@@ -70,7 +86,9 @@ class EvaluationList extends React.Component {
         <Button variant="fab" className={this.props.classes.fab} onClick={this.handleAdd}>
           <AddIcon />
         </Button>
-        <CreationDialog open={this.state.showCreationDialog} onClose={this.handleDialogClose} />
+        <CreationOrEditDialog open={this.state.showCreationOrEditDialog}
+          onClose={this.handleDialogClose}
+          evalItem={this.state.evalItem} />
       </Paper>
     );
   }
@@ -82,5 +100,9 @@ const mapStateToPros = (state) => {
   }
 };
 
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onDelete: (id) => dispatch(deleteEvaluation(id))
+});
+
 const styledComponent = withStyles(styles)(EvaluationList);
-export default connect(mapStateToPros, null)(styledComponent);
+export default connect(mapStateToPros, mapDispatchToProps)(styledComponent);
