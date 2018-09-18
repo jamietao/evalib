@@ -9,7 +9,8 @@ import Notifications from "@material-ui/icons/Notifications";
 import DashboardPage from "pages/Dashboard/Dashboard.jsx";
 import UserProfile from "pages/UserProfile/UserProfile.jsx";
 import EvaluationList from "pages/Evaluation/EvaluationList.jsx";
-import Typography from "pages/Typography/Typography.jsx";
+import QuestionList from "pages/Evaluation/QuestionList.jsx";
+import TemplateList from "pages/Template/TemplateList.jsx";
 import Icons from "pages/Icons/Icons.jsx";
 import NotificationsPage from "pages/Notifications/Notifications.jsx";
 
@@ -22,18 +23,23 @@ const dashboardRoutes = [
     component: DashboardPage
   },
   {
-    path: "/table",
+    path: "/template",
+    sidebarName: "模板管理",
+    navbarName: "模板管理",
+    icon: LibraryBooks,
+    component: TemplateList
+  },
+  {
+    path: "/evaluation",
     sidebarName: "题目管理",
     navbarName: "题目管理",
     icon: "content_paste",
-    component: EvaluationList
+    component: EvaluationList,
+    exact: true
   },
   {
-    path: "/typography",
-    sidebarName: "Typography",
-    navbarName: "Typography",
-    icon: LibraryBooks,
-    component: Typography
+    path: "/evaluation/:evalId",
+    component: QuestionList
   },
   {
     path: "/icons",
