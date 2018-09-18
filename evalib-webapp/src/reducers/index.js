@@ -16,7 +16,7 @@ let defaultState = {
                         { "label": "C", "description": "C choice" },
                         { "label": "D", "description": "D choice" }
                     ],
-                    "correctAnswer":"C"
+                    "correctAnswer":"A"
                 },
                 {
                     "description": "What does the recent study of Norwegian mothers show?",

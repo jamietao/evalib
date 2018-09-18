@@ -8,8 +8,7 @@ import Notifications from "@material-ui/icons/Notifications";
 // core components/views
 import DashboardPage from "pages/Dashboard/Dashboard.jsx";
 import UserProfile from "pages/UserProfile/UserProfile.jsx";
-import EvaluationList from "pages/Evaluation/EvaluationList.jsx";
-import QuestionList from "pages/Evaluation/QuestionList.jsx";
+import { EvaluationList, EvaluationDetails } from "pages/Evaluation";
 import TemplateList from "pages/Template/TemplateList.jsx";
 import Icons from "pages/Icons/Icons.jsx";
 import NotificationsPage from "pages/Notifications/Notifications.jsx";
@@ -39,7 +38,7 @@ const dashboardRoutes = [
   },
   {
     path: "/evaluation/:evalId",
-    component: QuestionList
+    component: EvaluationDetails
   },
   {
     path: "/icons",

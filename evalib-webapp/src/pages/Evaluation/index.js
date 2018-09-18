@@ -1,5 +1,4 @@
 import EvaluationList from './EvaluationList';
-import QuestionList from './QuestionList';
+import EvaluationDetails from './EvaluationDetails';
 
-export default EvaluationList;
-export { QuestionList }
+export { EvaluationList, EvaluationDetails }

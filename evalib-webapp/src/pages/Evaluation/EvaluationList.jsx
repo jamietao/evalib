@@ -4,27 +4,18 @@ import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 // core components
 import GridItem from "components/Grid/GridItem.jsx";
-import { Grid, Button, Paper, Tabs, Tab } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
-import green from "@material-ui/core/colors/green";
+import { Grid, Paper, Tabs, Tab } from "@material-ui/core";
 import gray from "@material-ui/core/colors/grey";
 import CreationOrEditDialog from "./component/CreationOrEditDialog";
 import EvaluationItem from "./component/EvaluationItem";
 import { connect } from "react-redux";
 import { deleteEvaluation } from "actions/actions.js";
+import AddAction from './component/AddAction';
 
 const styles = theme => ({
   evalContainer: {
     padding: theme.spacing.unit * 2,
     backgroundColor: gray[100],
-  },
-
-  fab: {
-    position: 'fixed',
-    bottom: theme.spacing.unit * 2,
-    right: theme.spacing.unit * 2,
-    color: theme.palette.common.white,
-    backgroundColor: green[500]
   }
 });
 
@@ -83,9 +74,7 @@ class EvaluationList extends React.Component {
             ))
           }
         </Grid>
-        <Button variant="fab" className={this.props.classes.fab} onClick={this.handleAdd}>
-          <AddIcon />
-        </Button>
+        <AddAction callback={this.handleAdd} />
         <CreationOrEditDialog open={this.state.showCreationOrEditDialog}
           onClose={this.handleDialogClose}
           evalItem={this.state.evalItem} />
@@ -100,7 +89,7 @@ const mapStateToPros = (state) => {
   }
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch) => ({
   onDelete: (id) => dispatch(deleteEvaluation(id))
 });
 
