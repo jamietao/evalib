@@ -24,6 +24,6 @@ export const updateChoiceQuestion = (evaluationId, choiceQuestion) => {
     return { type: EVALUATION_CHOICEQUESTION_UPDATE, evaluationId, choiceQuestion };
 };
 
-export const deleteChoiceQuestion = (questionId) => {
-    return { type: EVALUATION_CHOICEQUESTION_DELETE, questionId };
+export const deleteChoiceQuestion = (evaluationId, questionId) => {
+    return { type: EVALUATION_CHOICEQUESTION_DELETE, evaluationId, questionId };
 };

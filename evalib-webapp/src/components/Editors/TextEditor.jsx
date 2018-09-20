@@ -11,7 +11,7 @@ const TextEditor = ({ label = '', defaultValue, editMode, onChange }) => {
     )
 }
 
-TextEditor.PropTypes = {
+TextEditor.propTypes = {
     label: PropTypes.string,
     defaultValue: PropTypes.string,
     editMode: PropTypes.bool,

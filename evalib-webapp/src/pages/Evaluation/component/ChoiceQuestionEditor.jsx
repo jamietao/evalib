@@ -102,7 +102,7 @@ class ChoiceQuestionEditor extends React.Component {
         if (this.props.choiceType === 'single' && checked) {
             defaultValues = [option.label];
         } else if (this.props.choiceType === 'multiple') {
-            if (checked && this.state.defaultValues.indexOf(option.label) == -1) {
+            if (checked && this.state.defaultValues.indexOf(option.label) === -1) {
                 defaultValues = [...this.state.defaultValues, option.label]
             }
             if (!checked) {
@@ -175,11 +175,11 @@ class ChoiceQuestionEditor extends React.Component {
                 </ExpansionPanelDetails>
                 <ExpansionPanelActions className={classes.actionPanel}>
                     {
-                        (this.state.editMode ? actionsOnEditMode : actionsNoneEditMode).map(action => {
+                        (this.state.editMode ? actionsOnEditMode : actionsNoneEditMode).map((action, index) => {
                             return (
                                 <IconButton color={action.color}
                                     className={classes.iconButton}
-                                    onClick={action.callback}>
+                                    onClick={action.callback} key={index}>
                                     {action.icon}
                                 </IconButton>
                             )
@@ -190,17 +190,18 @@ class ChoiceQuestionEditor extends React.Component {
     }
 }
 
-ChoiceQuestionEditor.PropTypes = {
+ChoiceQuestionEditor.propTypes = {
     classes: PropTypes.object,
     editMode: PropTypes.bool.isRequired,
     choiceType: PropTypes.oneOf(["single", "multiple"]),
     expanded: PropTypes.bool,
     choiceQuestion: PropTypes.shape({
         description: PropTypes.string,
-        options: PropTypes.shape({
-            label: PropTypes.string,
-            description: PropTypes.string
-        }),
+        options: PropTypes.arrayOf(
+            PropTypes.shape({
+                label: PropTypes.string,
+                description: PropTypes.string
+            })),
         correctAnswer: PropTypes.arrayOf(PropTypes.string)
     }),
     onSave: PropTypes.func,

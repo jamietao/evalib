@@ -45,6 +45,10 @@ class EvaluationDetails extends React.Component {
         this.setState({ adding: false });
     }
 
+    handleDelete = (questionId) => {
+        this.props.onDeleteChoiceQuestion(this.props.evalItem.id, questionId);
+    }
+
     render() {
         const { classes, evalItem } = this.props;
         return (
@@ -82,6 +86,7 @@ class EvaluationDetails extends React.Component {
                                         choiceType="single" key={key}
                                         choiceQuestion={questionItem}
                                         onSave={(question) => this.handleUpdate(question)}
+                                        onDelete={() => this.handleDelete(questionItem.id)}
                                     />
                                 </Grid>
                             )
@@ -113,7 +118,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapStateToDispatch = (dispatch) => ({
     onAddChoiceQuestion: (evaluationId, question) => dispatch(addChoiceQuestion(evaluationId, question)),
-    onUpdateChoiceQuestion: (evaluationId, question) => dispatch(updateChoiceQuestion(evaluationId, question))
+    onUpdateChoiceQuestion: (evaluationId, question) => dispatch(updateChoiceQuestion(evaluationId, question)),
+    onDeleteChoiceQuestion: (evaluationId, questionId) => dispatch(deleteChoiceQuestion(evaluationId, questionId))
 })
 
 const styledComponent = withStyles(styles)(EvaluationDetails);

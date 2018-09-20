@@ -107,11 +107,10 @@ const reducers = (state = defaultState, action) => {
             };
         }
         case EVALUATION_CHOICEQUESTION_ADD: {
-            var question = {};
+            let question = {};
             Object.assign(question, action.choiceQuestion);
             question.id = (nextId++) + '';
-            alert(JSON.stringify(question));
-            var newEvaluations = state.evaluations.map(item => {
+            let newEvaluations = state.evaluations.map(item => {
                 if (item.id === action.evaluationId) {
                     return {
                         ...item,
@@ -127,10 +126,10 @@ const reducers = (state = defaultState, action) => {
             };
         }
         case EVALUATION_CHOICEQUESTION_UPDATE: {
-            var newEvaluations = state.evaluations.map(item => {
+            let newEvaluations = state.evaluations.map(item => {
                 if (item.id === action.evaluationId) {
                     if (item.singleChoiceQuestions) {
-                        var questions = item.singleChoiceQuestions.map(q => {
+                        let questions = item.singleChoiceQuestions.map(q => {
                             if (q.id === action.choiceQuestion.id) {
                                 return action.choiceQuestion;
                             }
@@ -142,6 +141,24 @@ const reducers = (state = defaultState, action) => {
                             singleChoiceQuestions: questions
                         };
                     }
+                }
+                return item;
+            });
+
+            return {
+                ...state,
+                evaluations: newEvaluations
+            };
+        }
+
+        case EVALUATION_CHOICEQUESTION_DELETE: {
+            let newEvaluations = state.evaluations.map(item => {
+                if (item.id === action.evaluationId) {
+                    let questions = item.singleChoiceQuestions.filter(q => q.id !== action.questionId);
+                    return {
+                        ...item,
+                        singleChoiceQuestions: questions
+                    };
                 }
                 return item;
             });

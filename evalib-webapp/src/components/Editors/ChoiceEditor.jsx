@@ -61,7 +61,7 @@ class ChoiceEditor extends React.Component {
     }
 }
 
-ChoiceEditor.PropTypes = {
+ChoiceEditor.propTypes = {
     choiceType: PropTypes.oneOf(["single", "multiple"]).isRequired,
     editMode: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired,
