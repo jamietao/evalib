@@ -1,4 +1,8 @@
 import { EVALUATION_CREATE, EVALUATION_UPDATE, EVALUATION_DELETE } from '../actions/types';
+import {
+    EVALUATION_CHOICEQUESTION_ADD, EVALUATION_CHOICEQUESTION_UPDATE,
+    EVALUATION_CHOICEQUESTION_DELETE
+} from 'actions/types';
 
 let nextId = 100;
 let defaultState = {
@@ -9,6 +13,7 @@ let defaultState = {
             description: "2018年英语四级英语考试真题",
             singleChoiceQuestions: [
                 {
+                    "id": "1",
                     "description": "What does the recent study of Norwegian mothers show?",
                     "options": [
                         { "label": "A", "description": "A choice" },
@@ -16,9 +21,10 @@ let defaultState = {
                         { "label": "C", "description": "C choice" },
                         { "label": "D", "description": "D choice" }
                     ],
-                    "correctAnswer":"A"
+                    "correctAnswer": ["A"]
                 },
                 {
+                    "id": "2",
                     "description": "What does the recent study of Norwegian mothers show?",
                     "options": [
                         { "label": "A", "description": "A choice" },
@@ -28,6 +34,7 @@ let defaultState = {
                     ]
                 },
                 {
+                    "id": "3",
                     "description": "What does the recent study of Norwegian mothers show?",
                     "options": [
                         { "label": "A", "description": "A choice" },
@@ -93,6 +100,51 @@ const reducers = (state = defaultState, action) => {
         case EVALUATION_DELETE: {
             let newEvaluations = state.evaluations.filter(item =>
                 item.id !== action.id);
+
+            return {
+                ...state,
+                evaluations: newEvaluations
+            };
+        }
+        case EVALUATION_CHOICEQUESTION_ADD: {
+            var question = {};
+            Object.assign(question, action.choiceQuestion);
+            question.id = (nextId++) + '';
+            alert(JSON.stringify(question));
+            var newEvaluations = state.evaluations.map(item => {
+                if (item.id === action.evaluationId) {
+                    return {
+                        ...item,
+                        singleChoiceQuestions: [...(item.singleChoiceQuestions || []), question]
+                    };
+                }
+                return item;
+            });
+
+            return {
+                ...state,
+                evaluations: newEvaluations
+            };
+        }
+        case EVALUATION_CHOICEQUESTION_UPDATE: {
+            var newEvaluations = state.evaluations.map(item => {
+                if (item.id === action.evaluationId) {
+                    if (item.singleChoiceQuestions) {
+                        var questions = item.singleChoiceQuestions.map(q => {
+                            if (q.id === action.choiceQuestion.id) {
+                                return action.choiceQuestion;
+                            }
+                            return q;
+                        })
+
+                        return {
+                            ...item,
+                            singleChoiceQuestions: questions
+                        };
+                    }
+                }
+                return item;
+            });
 
             return {
                 ...state,
