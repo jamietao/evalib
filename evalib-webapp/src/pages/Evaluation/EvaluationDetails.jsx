@@ -4,6 +4,7 @@ import grey from "@material-ui/core/colors/grey";
 import { connect } from "react-redux";
 import AddAction from './component/AddAction';
 import ChoiceQuestionEditor from './component/ChoiceQuestionEditor';
+import TextEditor from '../../components/Editors/TextEditor';
 import BackIcon from "@material-ui/icons/ArrowBack";
 import { Link } from "react-router-dom";
 import { addSubject, updateSubject, deleteSubject } from "actions/actions"
@@ -30,8 +31,8 @@ class EvaluationDetails extends React.Component {
         };
     }
 
-    onAddNew = () => {
-        this.setState({ adding: true });
+    onAddNew = (subjectType) => {
+        this.setState({ adding: true, subjectType });
     }
 
     handleCancelAddNew = () => {
@@ -115,19 +116,31 @@ class EvaluationDetails extends React.Component {
                             })
                         }
                         {
-                            this.state.adding && ["single"].map(() =>
-                                <Grid item xs={12} md={12} sm={12} className={classes.itemContainer}>
-                                    <ChoiceQuestionEditor editMode={true}
-                                        choiceType="single"
-                                        onCancel={this.handleCancelAddNew}
-                                        onSave={(question) => this.handleCreate(question)} />
-                                </Grid>
-                            )
+                            this.state.adding && [this.state.subjectType].map((subjectType) => {
+                                if (subjectType === 'singleChoiceQuestion') {
+                                    return (
+                                        <Grid item xs={12} md={12} sm={12} className={classes.itemContainer}>
+                                            <ChoiceQuestionEditor editMode={true}
+                                                choiceType="single"
+                                                onCancel={this.handleCancelAddNew}
+                                                onSave={(question) => this.handleCreate(question)} />
+                                        </Grid>);
+                                } else if (subjectType === 'passage') {
+                                    return (
+                                        <Grid item xs={12} md={12} sm={12} className={classes.itemContainer}>
+                                            <TextEditor editMode={true}
+                                                choiceType="single"
+                                                onCancel={this.handleCancelAddNew}
+                                                onSave={(question) => this.handleCreate(question)} />
+                                        </Grid>);
+                                }
+                                return <div>Unknown subject type.</div>
+                            })
                         }
                     </Grid>
                 }
                 <AddAction callback={this.onAddNew} />
-            </Paper>);
+            </Paper >);
     }
 }
 
