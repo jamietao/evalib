@@ -1,8 +1,8 @@
-import { EVALUATION_CREATE, EVALUATION_UPDATE, EVALUATION_DELETE } from './types';
+import { EVALUATION_CREATE, EVALUATION_UPDATE, EVALUATION_DELETE } from '../constants';
 import {
-    EVALUATION_QUESTION_ADD, EVALUATION_QUESTION_UPDATE,
-    EVALUATION_QUESTION_DELETE
-} from './types';
+    EVALUATION_SUBJECT_ADD, EVALUATION_SUBJECT_UPDATE,
+    EVALUATION_SUBJECT_DELETE
+} from '../constants';
 
 export const createEvaluation = (name, description) => {
     return { type: EVALUATION_CREATE, name, description }
@@ -16,23 +16,23 @@ export const deleteEvaluation = (id) => {
     return { type: EVALUATION_DELETE, id };
 };
 
-export const addQuestion = (question) => {
+export const addSubject = (subject) => {
     return {
-        type: EVALUATION_QUESTION_ADD,
-        question
+        type: EVALUATION_SUBJECT_ADD,
+        subject
     };
 };
 
-export const updateQuestion = (question) => {
+export const updateSubject = (subject) => {
     return {
-        type: EVALUATION_QUESTION_UPDATE,
-        question
+        type: EVALUATION_SUBJECT_UPDATE,
+        subject
     };
 };
 
-export const deleteQuestion = (questionId) => {
+export const deleteSubject = (subjectId) => {
     return {
-        type: EVALUATION_QUESTION_DELETE,
-        questionId
+        type: EVALUATION_SUBJECT_DELETE,
+        subjectId
     };
 };

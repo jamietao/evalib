@@ -1,8 +1,5 @@
-import { EVALUATION_CREATE, EVALUATION_UPDATE, EVALUATION_DELETE } from '../actions/types';
-import {
-    EVALUATION_QUESTION_ADD, EVALUATION_QUESTION_UPDATE,
-    EVALUATION_QUESTION_DELETE
-} from 'actions/types';
+import { EVALUATION_CREATE, EVALUATION_UPDATE, EVALUATION_DELETE } from '../constants';
+import { EVALUATION_SUBJECT_ADD, EVALUATION_SUBJECT_UPDATE, EVALUATION_SUBJECT_DELETE } from '../constants';
 
 let nextId = 100;
 let defaultState = {
@@ -51,11 +48,11 @@ let defaultState = {
             "questions": []
         },
     ],
-    "questions": [
+    "subjects": [
         {
             "id": "1",
             "sectionId": "2",
-            "questionType": "singleChoice",
+            "subjectType": "singleChoiceQuestion",
             "description": "What does the recent study of Norwegian mothers show?",
             "options": [
                 { "label": "A", "description": "A choice" },
@@ -68,7 +65,7 @@ let defaultState = {
         {
             "id": "2",
             "sectionId": "2",
-            "questionType": "singleChoice",
+            "subjectType": "singleChoiceQuestion",
             "description": "What does the recent study of Norwegian mothers show?",
             "options": [
                 { "label": "A", "description": "A choice" },
@@ -80,7 +77,7 @@ let defaultState = {
         {
             "id": "3",
             "sectionId": "2",
-            "questionType": "singleChoice",
+            "subjectType": "singleChoiceQuestion",
             "description": "What does the recent study of Norwegian mothers show?",
             "options": [
                 { "label": "A", "description": "A choice" },
@@ -138,56 +135,56 @@ const reducers = (state = defaultState, action) => {
                 evaluations: newEvaluations
             };
         }
-        case EVALUATION_QUESTION_ADD: {
-            if (!action.question.sectionId) {
-                throw "Question.SectionId is required";
+        case EVALUATION_SUBJECT_ADD: {
+            if (!action.subject.sectionId) {
+                throw new Error("Subject.SectionId is required");
             }
-            let section = state.sections.find(s => s.id === action.question.sectionId);
+            let section = state.sections.find(s => s.id === action.subject.sectionId);
             if (section == null) {
-                throw "Invalid Question.SectionId, section does not exist";
+                throw new Error("Invalid Subject.SectionId, section does not exist");
             }
 
-            let question = {};
-            Object.assign(question, action.question);
-            question.id = (++nextId) + "";
+            let subject = {};
+            Object.assign(subject, action.subject);
+            subject.id = (++nextId) + "";
             return {
                 ...state,
-                questions: [...state.questions, question]
+                subjects: [...state.subjects, subject]
             };
         }
 
-        case EVALUATION_QUESTION_UPDATE: {
-            if (!action.question.sectionId || !action.question.id) {
-                throw "Question.Id and Question.SectionId are required fields";
+        case EVALUATION_SUBJECT_UPDATE: {
+            if (!action.subject.sectionId || !action.subject.id) {
+                throw new Error("Subject.Id and Subject.SectionId are required fields");
             }
 
-            let question = state.questions.find(q => q.id === action.question.id);
+            let question = state.subjects.find(q => q.id === action.subject.id);
             if (question == null) {
-                throw "Question not found, cannot be updated";
+                throw new Error("Subject not found, cannot be updated");
             }
 
-            if (question.sectionId != action.question.sectionId) {
-                throw "Question.SectionId cannot be updated";
+            if (question.sectionId !== action.subject.sectionId) {
+                throw new Error("Subject.SectionId cannot be updated");
             }
 
-            let newQuestions = state.questions.map(q => {
-                if (q.id === action.question.id) {
-                    return action.question;
+            let newQuestions = state.subjects.map(q => {
+                if (q.id === action.subject.id) {
+                    return action.subject;
                 }
                 return q;
             });
 
             return {
                 ...state,
-                questions: newQuestions
+                subjects: newQuestions
             };
         }
 
-        case EVALUATION_QUESTION_DELETE: {
-            let newQuestions = state.questions.filter(q => q.id !== action.id);
+        case EVALUATION_SUBJECT_DELETE: {
+            let newQuestions = state.subjects.filter(q => q.id !== action.subjectId);
             return {
                 ...state,
-                questions: newQuestions
+                subjects: newQuestions
             };
         }
 

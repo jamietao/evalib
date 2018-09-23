@@ -6,7 +6,7 @@ import AddAction from './component/AddAction';
 import ChoiceQuestionEditor from './component/ChoiceQuestionEditor';
 import BackIcon from "@material-ui/icons/ArrowBack";
 import { Link } from "react-router-dom";
-import { addQuestion, updateQuestion, deleteQuestion } from "actions/actions"
+import { addSubject, updateSubject, deleteSubject } from "actions/actions"
 import InfoIcon from "@material-ui/icons/Info";
 
 const styles = theme => ({
@@ -39,19 +39,18 @@ class EvaluationDetails extends React.Component {
     }
 
     handleUpdate = (question) => {
-        this.props.onUpdateQuestion(question);
+        this.props.onUpdateSubject(question);
     }
 
     handleCreate = (question) => {
         let section = this.props.sections[this.state.tabIndex];
         question.sectionId = section.id;
-        alert(question.sectionId);
-        this.props.onAddQuestion(question);
+        this.props.onAddSubject(question);
         this.setState({ adding: false });
     }
 
     handleDelete = (questionId) => {
-        this.props.onDeleteQuestion(questionId);
+        this.props.onDeleteSubject(questionId);
     }
 
     handleTabIndexChange = (e, value) => {
@@ -59,7 +58,7 @@ class EvaluationDetails extends React.Component {
     }
 
     render() {
-        const { classes, evalItem, sections, questions } = this.props;
+        const { classes, evalItem, sections, subjects } = this.props;
         return (
             <Paper>
                 <Grid container>
@@ -101,8 +100,8 @@ class EvaluationDetails extends React.Component {
                 {
                     <Grid className={classes.pagerContainer} container>
                         {
-                            questions[this.state.tabIndex].sectionQuestions &&
-                            questions[this.state.tabIndex].sectionQuestions.map((questionItem, key) => {
+                            subjects[this.state.tabIndex].sectionSubjects &&
+                            subjects[this.state.tabIndex].sectionSubjects.map((questionItem, key) => {
                                 return (
                                     <Grid item key={key} xs={12} md={12} sm={12} className={classes.itemContainer}>
                                         <ChoiceQuestionEditor editMode={false}
@@ -136,25 +135,25 @@ const mapStateToProps = (state, ownProps) => {
     let evalId = ownProps.match.params.evalId;
     let evalItem = state.evalib.evaluations.find(item => item.id === evalId);
     let sections = state.evalib.sections.filter(item => item.evaluationId === evalId);
-    let questions = sections.map(item => {
-        let sectionQuestions = state.evalib.questions.filter(q => q.sectionId === item.id);
+    let subjects = sections.map(item => {
+        let sectionSubjects = state.evalib.subjects.filter(q => q.sectionId === item.id);
         return {
             "sectionId": item.id,
-            "sectionQuestions": sectionQuestions
+            "sectionSubjects": sectionSubjects
         };
     });
 
     return {
         evalItem,
         sections,
-        questions
+        subjects
     };
 }
 
 const mapStateToDispatch = (dispatch) => ({
-    onAddQuestion: (question) => dispatch(addQuestion(question)),
-    onUpdateQuestion: (question) => dispatch(updateQuestion(question)),
-    onDeleteQuestion: (questionId) => dispatch(deleteQuestion(questionId))
+    onAddSubject: (subject) => dispatch(addSubject(subject)),
+    onUpdateSubject: (subject) => dispatch(updateSubject(subject)),
+    onDeleteSubject: (subjectId) => dispatch(deleteSubject(subjectId))
 })
 
 const styledComponent = withStyles(styles)(EvaluationDetails);
