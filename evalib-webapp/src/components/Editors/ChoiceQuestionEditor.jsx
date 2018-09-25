@@ -35,7 +35,9 @@ const style = theme => ({
 });
 
 class ChoiceQuestionEditor extends React.Component {
-    choiceQuestion = {}
+    choiceQuestion = {
+        'subjectType': 'singleChoiceQuestion'
+    };
 
     constructor(props) {
         super(props);
@@ -48,7 +50,7 @@ class ChoiceQuestionEditor extends React.Component {
         };
 
         // clone the choice question.
-        this.choiceQuestion = JSON.parse(JSON.stringify(this.props.choiceQuestion));
+        Object.assign(this.choiceQuestion, this.props.choiceQuestion);
     }
 
     handleEdit = () => {
