@@ -26,7 +26,7 @@ const AddAction = ({ classes, callback }) => {
                 </Button >
             </Grid>
             <Grid item>
-                <Button variant="fab" className={classes.fab} onClick={() => callback('passage')}>
+                <Button variant="fab" className={classes.fab} onClick={() => callback('richTextSubject')}>
                     <DescriptionIcon />
                 </Button>
             </Grid>

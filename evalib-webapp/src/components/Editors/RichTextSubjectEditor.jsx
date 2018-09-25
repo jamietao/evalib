@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { IconButton, Grid, withStyles, Paper } from '@material-ui/core';
-import { grey } from "@material-ui/core/colors";
 import SaveIcon from "@material-ui/icons/Save";
 import EditIcon from "@material-ui/icons/Edit";
 import CancelIcon from "@material-ui/icons/Cancel";
 import DeleteIcon from "@material-ui/icons/Delete";
-
-import TextEditor from "./TextEditor";
+import RichTextEditor from 'react-rte';
 
 const style = theme => ({
     gridMargin: {
@@ -21,20 +19,21 @@ const style = theme => ({
     },
 });
 
-class PlainTextEditor extends React.Component {
-    plainTextSubject = {
-        'subjectType': 'plainText'
+class RichTextSubjectEditor extends React.Component {
+    richTextSubject = {
+        'subjectType': 'richTextSubject'
     };
 
     constructor(props) {
         super(props);
         this.state = {
             editMode: this.props.editMode,
-            description: this.props.plainTextSubject.description
+            richText: RichTextEditor.createValueFromString(
+                this.props.richTextSubject.richText, 'html')
         };
 
         // clone the plain text object.
-        Object.assign(this.plainTextSubject, this.props.plainTextSubject);
+        Object.assign(this.richTextSubject, this.props.richTextSubject);
     }
 
     handleEdit = () => {
@@ -44,7 +43,7 @@ class PlainTextEditor extends React.Component {
     }
 
     handleSave = () => {
-        this.props.onSave(this.plainTextSubject);
+        this.props.onSave(this.richTextSubject);
         this.setState({
             editMode: false
         });
@@ -61,9 +60,9 @@ class PlainTextEditor extends React.Component {
         this.props.onDelete();
     }
 
-    handleDescriptionChange = (text) => {
-        this.setState({ description: text });
-        this.plainTextSubject["description"] = text;
+    handleRichTextChange = (value) => {
+        this.setState({ richText: value });
+        this.richTextSubject.richText = value.toString('html');
     }
 
     render() {
@@ -82,10 +81,14 @@ class PlainTextEditor extends React.Component {
             <Paper>
                 <Grid container className={classes.gridMargin}>
                     <Grid item xs={12} md={12} sm={12}>
-                        <TextEditor label="Question?"
-                            editMode={this.state.editMode}
-                            defaultValue={this.state.description}
-                            onChange={this.handleDescriptionChange} />
+                        {
+                            this.state.editMode ?
+                                <RichTextEditor
+                                    value={this.state.richText}
+                                    onChange={this.handleRichTextChange} /> :
+                                <div dangerouslySetInnerHTML={{ __html: this.state.richText.toString('html') }}></div>
+                        }
+
                     </Grid>
                     {
                         <Grid item xs={12} md={12} sm={12}>
@@ -112,25 +115,25 @@ class PlainTextEditor extends React.Component {
     }
 }
 
-PlainTextEditor.propTypes = {
+RichTextSubjectEditor.propTypes = {
     classes: PropTypes.object,
     editMode: PropTypes.bool.isRequired,
-    plainTextSubject: PropTypes.shape({
-        description: PropTypes.string,
+    richTextSubject: PropTypes.shape({
+        richText: PropTypes.string,
     }),
     onSave: PropTypes.func,
     onCancel: PropTypes.func,
     onDelete: PropTypes.func
 };
 
-PlainTextEditor.defaultProps = {
+RichTextSubjectEditor.defaultProps = {
     editMode: true,
-    plainTextSubject: {
-        description: '',
+    richTextSubject: {
+        richText: '',
     },
     onSave: () => { },
     onCancel: () => { },
     onDelete: () => { }
 };
 
-export default withStyles(style)(PlainTextEditor);
+export default withStyles(style)(RichTextSubjectEditor);

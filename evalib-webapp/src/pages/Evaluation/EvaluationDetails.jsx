@@ -4,7 +4,7 @@ import grey from "@material-ui/core/colors/grey";
 import { connect } from "react-redux";
 import AddAction from './component/AddAction';
 import ChoiceQuestionEditor from 'components/Editors/ChoiceQuestionEditor';
-import PlainTextEditor from 'components/Editors/PlainTextEditor';
+import RichTextSubjectEditor from 'components/Editors/RichTextSubjectEditor';
 import BackIcon from "@material-ui/icons/ArrowBack";
 import { Link } from "react-router-dom";
 import { addSubject, updateSubject, deleteSubject } from "actions/actions"
@@ -112,8 +112,8 @@ class EvaluationDetails extends React.Component {
                                                     choiceQuestion={questionItem}
                                                     onSave={(question) => this.handleUpdate(question)}
                                                     onDelete={() => this.handleDelete(questionItem.id)} /> :
-                                                <PlainTextEditor editMode={false}
-                                                    plainTextSubject={questionItem}
+                                                <RichTextSubjectEditor editMode={false}
+                                                    richTextSubject={questionItem}
                                                     onSave={(question) => this.handleUpdate(question)}
                                                     onDelete={() => this.handleDelete(questionItem.id)} />
                                         }
@@ -132,10 +132,10 @@ class EvaluationDetails extends React.Component {
                                                 onCancel={this.handleCancelAddNew}
                                                 onSave={(question) => this.handleCreate(question)} />
                                         </Grid>);
-                                } else if (subjectType === 'passage') {
+                                } else if (subjectType === 'richTextSubject') {
                                     return (
                                         <Grid item xs={12} md={12} sm={12} className={classes.itemContainer}>
-                                            <PlainTextEditor editMode={true}
+                                            <RichTextSubjectEditor editMode={true}
                                                 onCancel={this.handleCancelAddNew}
                                                 onSave={(question) => this.handleCreate(question)} />
                                         </Grid>);
