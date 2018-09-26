@@ -3,6 +3,39 @@ import { EVALUATION_SUBJECT_ADD, EVALUATION_SUBJECT_UPDATE, EVALUATION_SUBJECT_D
 
 let nextId = 100;
 let defaultState = {
+    templates: [
+        {
+            'id': '1',
+            'title': '大学英语四级考试试题结构 - 2008',
+            'lastUpdateTime': 'September 26th 2018',
+            'sections': [
+                {
+                    "id": "1",
+                    "label": "写作",
+                    "description": "Directions: For this part, you are allowed 30 minutes to write a short essay on the topic of Welcome to our club. You should write at least 120 words following the outline given bellow:",
+                },
+                {
+                    "id": "2",
+                    "label": "快速阅读",
+                    "description": "Directions: In this part, you will have 15 minutes to go over the passage quickly and answer the questions." +
+                        "For questions 1-7, mark Y (for YES) if the statement agrees with the information given in the passage;" +
+                        "N (for NO) if statement contradicts the information given in the passage;" +
+                        "NG (for NOT GIVEN) if the information is not given in the passage." +
+                        "For question 8-10, complete the sentences with the information given in the passage.",
+                },
+                {
+                    "id": "3",
+                    "label": "阅读理解",
+                    "description": "Directions: There are 2 passages in this section. Each passage is followed by some questions or unfinished statements. For each of them there are four choices marked A) , B) , C) and D) . You should decide on the best choice and mark the corresponding letter on Answer Sheet 2 with a single line through the centre.",
+                },
+                {
+                    "id": "4",
+                    "label": "翻译",
+                    "description": "Directions: Complete the sentences by translating into English the Chinese given in brackets.",
+                },
+            ],
+        }
+    ],
     evaluations: [
         {
             id: "1",
