@@ -12,7 +12,7 @@ pipeline {
 			steps {
 				echo 'Building #${env.BUILD_ID}...'
 				sh 'cd evalib-server && mvn clean package'
-				sh 'cd target && ls -al'
+				sh 'cd evalib-server && ls -al'
 			}
 		}
 		stage('Test') {
