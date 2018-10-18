@@ -1,8 +1,7 @@
 import groovy.json.JsonOutput
 
-node {
-    checkout scm
-	
+pipeline {
+    agent any	
 	stages {
 		stage('Build') {
 			steps {
