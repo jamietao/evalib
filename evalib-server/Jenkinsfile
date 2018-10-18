@@ -1,26 +1,32 @@
 import groovy.json.JsonOutput
 
 node {
-  def gitsha = null
-  def buildBranch = env.BUILD_BRANCH.replaceAll('[-/]','_')
-  currentBuild.description = env.BRANCH_NAME
-  
-  try {
-  stage('Restore') {
-    def scmVars = checkout scm
-    gitsha = scmVars.GIT_COMMIT
-    sh 'export AWS_DEFAULT_PROFILE=smr-iam-s3-jenkins && aws s3 cp s3://smr-ops-int-s3-build-artifacts/builds/' + buildBranch + '/smr-authlib-' + buildBranch + '.latest latest.txt'
-    sh 'export AWS_DEFAULT_PROFILE=smr-iam-s3-jenkins && aws s3 cp s3://smr-ops-int-s3-build-artifacts/builds/' + buildBranch + '/$(<latest.txt) Service/Alert/CafePackages/authlib.zip'
-    sh 'cd Service/Alert/CafePackages && unzip -o ./authlib.zip'
-  }
-
-  def buildVersion = sh (script: 'cat deploy/release.version', returnStdout: true)
-  buildVersion = buildVersion.trim()
-  echo buildVersion
-
-  stage('Build') {
-  }
-
-  stage('Publish') {
-  } 
+    checkout scm
+	
+	stages {
+		stage('Build') {
+			steps {
+				echo 'Building...'
+                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+			}
+		}
+		stage('Test') {
+			steps {
+				echo 'Testing...'
+			}
+		}
+		stage('Publish') {
+			steps {
+				echo 'Publishing...'
+			}
+		}
+   }
+   post {
+		always {
+			echo 'post section...'
+		}
+		failure {
+			echo 'failure...'
+		}
+   }
 }
