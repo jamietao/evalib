@@ -1,12 +1,17 @@
 import groovy.json.JsonOutput
 
 pipeline {
-    agent any	
+    agent {
+		docker {
+			image 'maven:3.5-jdk-8'
+			args '-v $HOME/.m2:/root/.m2'
+		}
+	}
 	stages {
 		stage('Build') {
 			steps {
-				echo 'Building...'
-                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+				echo 'Building #${env.BUILD_ID}...'
+				sh 'mvn -B'
 			}
 		}
 		stage('Test') {
