@@ -12,6 +12,7 @@ pipeline {
 			steps {
 				echo 'Building #${env.BUILD_ID}...'
 				sh 'mvn -v'
+				sh 'ls -al'
 			}
 		}
 		stage('Test') {
