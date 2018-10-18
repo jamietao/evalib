@@ -12,7 +12,6 @@ pipeline {
 			steps {
 				echo 'Building #${env.BUILD_ID}...'
 				sh 'cd evalib-server && mvn clean package'
-				sh 'cd evalib-server/target && ls -al'
 			}
 		}
 		stage('Test') {
@@ -29,7 +28,7 @@ pipeline {
    post {
 		always {
 			echo 'post section...'
-			archiveArtifacts artifacts: 'evalib-server/target/*.jar'
+			archiveArtifacts artifacts: 'evalib-server/evalib-web-admin/target/*.jar'
 		}
 		failure {
 			echo 'failure...'
