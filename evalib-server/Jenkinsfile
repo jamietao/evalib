@@ -8,7 +8,8 @@ node {
 	}
   
 	stage('Build') {		
-		docker.image('maven:3.5-jdk-8').withRun('-v $HOME/.m2:/root/.m2') { c->
+		def mavenImage = docker.image('maven:3.5-jdk-8').
+		mavenImage.inside('-v $HOME/.m2:/root/.m2') {
 			sh 'cd evalib-server'
 			sh 'mvn clean package'
 			dockerImage = docker.build("jamietao/evalib", "-f evalib-server/docker/Dockerfile")
