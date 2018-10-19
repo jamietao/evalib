@@ -8,8 +8,6 @@ pipeline {
 		}
 	}
 	
-	def dockerImage
-	
 	stages {
 		stage('Build') {
 			steps {
@@ -26,6 +24,7 @@ pipeline {
 		
 		stage('Docker') {
 			docker.withRegistry('https://hub.docker.com/', 'docker-hub-credentials') {
+				def dockerImage = docker.build("jamietao/evalib", "-f evalib-server/docker/Dockerfile")
 				dockerImage.push('${env.BUILD_NUMBER}')
 				dockerImage.push('latest')
 			}
