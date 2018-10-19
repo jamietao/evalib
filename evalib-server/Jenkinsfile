@@ -7,16 +7,11 @@ node {
 		checkout scm
 	}
   
-	stage('Build') {
-		agent {
-			docker {
-				image 'maven:3.5-jdk-8'
-				args '-v $HOME/.m2:/root/.m2'
-			}
+	stage('Build') {		
+		docker.image('maven:3.5-jdk-8').withRun('-v $HOME/.m2:/root/.m2') {
+			sh 'cd evalib-server && mvn clean package'
+			dockerImage = docker.build("jamietao/evalib", "-f evalib-server/docker/Dockerfile")
 		}
-		echo 'Building #${env.BUILD_NUMBER}...'
-		sh 'cd evalib-server && mvn clean package'
-		dockerImage = docker.build("jamietao/evalib", "-f evalib-server/docker/Dockerfile")
 	}
 	
 	stage('Test') {
