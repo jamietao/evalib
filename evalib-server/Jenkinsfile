@@ -3,32 +3,41 @@ import groovy.json.JsonOutput
 node {	
 	def dockerImage
 	
-	stages {
-		stage('Build') {
-		    agent {
-				docker {
-					image 'maven:3.5-jdk-8'
-					args '-v $HOME/.m2:/root/.m2'
-				}
-			}
-			echo 'Building #${env.BUILD_NUMBER}...'
-			sh 'cd evalib-server && mvn clean package'
-			dockerImage = docker.build("jamietao/evalib", "-f evalib-server/docker/Dockerfile")
-		}
-		stage('Test') {
-			steps {
-				echo 'Testing...'
+	stage('checkout') {
+		checkout scm
+	}
+  
+	stage('Build') {
+		agent {
+			docker {
+				image 'maven:3.5-jdk-8'
+				args '-v $HOME/.m2:/root/.m2'
 			}
 		}
-		
-		stage('Docker') {
-			docker.withRegistry('https://hub.docker.com/', 'docker-hub-credentials') {
-				dockerImage.push('${env.BUILD_NUMBER}')
-				dockerImage.push('latest')
-			}
+		echo 'Building #${env.BUILD_NUMBER}...'
+		sh 'cd evalib-server && mvn clean package'
+		dockerImage = docker.build("jamietao/evalib", "-f evalib-server/docker/Dockerfile")
+	}
+	
+	stage('Test') {
+		steps {
+			echo 'Testing...'
 		}
-   }
-   post {
+	}
+	
+	stage('Docker') {
+		docker.withRegistry('https://hub.docker.com/', 'docker-hub-credentials') {
+			dockerImage.push('${env.BUILD_NUMBER}')
+			dockerImage.push('latest')
+		}
+	}
+	
+	stage('leanup') {
+		// removing the image locally that has been pushed into docker hub
+		sh 'docker rmi jamietao/evalib'
+	}
+	
+	post {
 		always {
 			echo 'post section...'
 			archiveArtifacts artifacts: 'evalib-server/evalib-web-admin/target/*.jar'
@@ -36,5 +45,5 @@ node {
 		failure {
 			echo 'failure...'
 		}
-   }
+    }
 }
