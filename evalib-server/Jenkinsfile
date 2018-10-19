@@ -10,7 +10,7 @@ pipeline {
 	stages {
 		stage('Build') {
 			steps {
-				echo 'Building #${env.BUILD_ID}...'
+				echo 'Building #${env.BUILD_NUMBER}...'
 				sh 'cd evalib-server && mvn clean package'
 			}
 		}
@@ -19,9 +19,10 @@ pipeline {
 				echo 'Testing...'
 			}
 		}
-		stage('Publish') {
+		stage('Docker') {
 			steps {
-				echo 'Publishing...'
+				echo 'Building the docker image...'				
+				def image = docker.build("evalib-service", "-t ${env.BUILD_NUMBER} -t latest -f evalib-server/docker/Dockerfile")				
 			}
 		}
    }
