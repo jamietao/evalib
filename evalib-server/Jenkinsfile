@@ -7,29 +7,34 @@ node {
 		checkout scm
 	}
   
-	stage('Build') {		
-		def mavenImage = docker.image('maven:3.5-jdk-8').
-		mavenImage.inside('-v $HOME/.m2:/root/.m2') {
-			sh 'cd evalib-server'
-			sh 'mvn clean package'
-			dockerImage = docker.build("jamietao/evalib", "-f evalib-server/docker/Dockerfile")
+	stage('build-artifacts') {		
+		def mavenImage = docker.image('maven:3.5-jdk-8')
+		mavenImage.inside("-v $HOME/.m2:/root/.m2") {
+			sh """
+				cd evalib-server
+				mvn clean package
+			"""
 		}
 	}
 	
-	stage('Test') {
+	stage('build-docker') {
+		dockerImage = docker.build("jamietao/evalib", "-f evalib-server/docker/Dockerfile")
+	}
+	
+	stage('test') {
 		steps {
 			echo 'Testing...'
 		}
 	}
 	
-	stage('Docker') {
+	stage('publish-docker') {
 		docker.withRegistry('https://hub.docker.com/', 'docker-hub-credentials') {
 			dockerImage.push('${env.BUILD_NUMBER}')
 			dockerImage.push('latest')
 		}
 	}
 	
-	stage('leanup') {
+	stage('cleanup') {
 		// removing the image locally that has been pushed into docker hub
 		sh 'docker rmi jamietao/evalib'
 	}
