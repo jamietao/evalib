@@ -7,11 +7,15 @@ pipeline {
 			args '-v $HOME/.m2:/root/.m2'
 		}
 	}
+	
+	def dockerImage
+	
 	stages {
 		stage('Build') {
 			steps {
 				echo 'Building #${env.BUILD_NUMBER}...'
 				sh 'cd evalib-server && mvn clean package'
+				dockerImage = docker.build("jamietao/evalib", "-f evalib-server/docker/Dockerfile")
 			}
 		}
 		stage('Test') {
@@ -19,10 +23,11 @@ pipeline {
 				echo 'Testing...'
 			}
 		}
+		
 		stage('Docker') {
-			steps {
-				echo 'Building the docker image...'				
-				def image = docker.build("evalib-service", "-t ${env.BUILD_NUMBER} -t latest -f evalib-server/docker/Dockerfile")				
+			docker.withRegistry('https://hub.docker.com/', 'docker-hub-credentials') {
+				dockerImage.push('${env.BUILD_NUMBER}')
+				dockerImage.push('latest')
 			}
 		}
    }
