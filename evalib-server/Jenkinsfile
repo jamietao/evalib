@@ -22,9 +22,7 @@ node {
 	}
 	
 	stage('test') {
-		steps {
-			echo 'Testing...'
-		}
+		echo 'Testing...'
 	}
 	
 	stage('publish-docker') {
@@ -38,14 +36,4 @@ node {
 		// removing the image locally that has been pushed into docker hub
 		sh 'docker rmi jamietao/evalib'
 	}
-	
-	post {
-		always {
-			echo 'post section...'
-			archiveArtifacts artifacts: 'evalib-server/evalib-web-admin/target/*.jar'
-		}
-		failure {
-			echo 'failure...'
-		}
-    }
 }
