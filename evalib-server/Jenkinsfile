@@ -26,7 +26,7 @@ node {
 	}
 	
 	stage('publish-docker') {
-		docker.withRegistry('https://hub.docker.com/', 'docker-hub-credentials') {
+		docker.withRegistry('https://index.docker.io/v2', 'docker-hub-credentials') {
 			dockerImage.push('${env.BUILD_NUMBER}')
 			dockerImage.push('latest')
 		}
