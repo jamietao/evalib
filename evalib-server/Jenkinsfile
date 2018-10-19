@@ -1,12 +1,14 @@
 import groovy.json.JsonOutput
 
-pipeline {
+node {
     agent {
 		docker {
 			image 'maven:3.5-jdk-8'
 			args '-v $HOME/.m2:/root/.m2'
 		}
 	}
+	
+	def dockerImage
 	
 	stages {
 		stage('Build') {
@@ -24,7 +26,6 @@ pipeline {
 		
 		stage('Docker') {
 			docker.withRegistry('https://hub.docker.com/', 'docker-hub-credentials') {
-				def dockerImage = docker.build("jamietao/evalib", "-f evalib-server/docker/Dockerfile")
 				dockerImage.push('${env.BUILD_NUMBER}')
 				dockerImage.push('latest')
 			}
