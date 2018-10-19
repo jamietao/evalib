@@ -18,7 +18,7 @@ node {
 	}
 	
 	stage('build-docker') {
-		dockerImage = docker.build("jamietao/evalib", "-f evalib-server/docker/Dockerfile")
+		dockerImage = docker.build("jamietao/evalib", "evalib-server/docker/")
 	}
 	
 	stage('test') {
