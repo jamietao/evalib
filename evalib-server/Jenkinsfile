@@ -28,12 +28,14 @@ node {
 	stage('publish-docker') {
 		echo "${env.BUILD_NUMBER}"
 		docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-			dockerImage.push('latest')
+			dockerImage.push("${env.BUILD_NUMBER}")
+			dockerImage.push("latest")
 		}
 	}
 	
 	stage('cleanup') {
 		// removing the image locally that has been pushed into docker hub
-		sh 'docker rmi jamietao/evalib'
+		echo "docker image id: ${dockerImage.id}"
+		sh 'docker rmi ' + dockerImage.id
 	}
 }
