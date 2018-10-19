@@ -1,22 +1,19 @@
 import groovy.json.JsonOutput
 
-node {
-    agent {
-		docker {
-			image 'maven:3.5-jdk-8'
-			args '-v $HOME/.m2:/root/.m2'
-		}
-	}
-	
+node {	
 	def dockerImage
 	
 	stages {
 		stage('Build') {
-			steps {
-				echo 'Building #${env.BUILD_NUMBER}...'
-				sh 'cd evalib-server && mvn clean package'
-				dockerImage = docker.build("jamietao/evalib", "-f evalib-server/docker/Dockerfile")
+		    agent {
+				docker {
+					image 'maven:3.5-jdk-8'
+					args '-v $HOME/.m2:/root/.m2'
+				}
 			}
+			echo 'Building #${env.BUILD_NUMBER}...'
+			sh 'cd evalib-server && mvn clean package'
+			dockerImage = docker.build("jamietao/evalib", "-f evalib-server/docker/Dockerfile")
 		}
 		stage('Test') {
 			steps {
