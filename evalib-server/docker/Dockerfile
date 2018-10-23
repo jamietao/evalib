@@ -18,7 +18,7 @@ WORKDIR	$EVALIB_HOME
 
 # Copy the service jar file and startup script.
 COPY evalib-startup.sh evalib-server/docker
-COPY $EVALIB_JAR_FILE evalib-server/evalib-web-admin/target
+COPY evalib-web-admin-0.0.1-SNAPSHOT.jar evalib-server/evalib-web-admin/target
 
 # Service will be running and listening on 80 port.
 EXPOSE 80
