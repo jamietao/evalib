@@ -5,7 +5,7 @@ FROM java:8
 ARG BUILD_VERSION=1.0
 
 # Environment variable.
-ENV EVALIB_HOME /var/evalib/${BUILD_VERSION}/
+ENV EVALIB_HOME "/var/evalib/${BUILD_VERSION}/"
 ENV EVALIB_JAR_FILE evalib-web-admin.jar
 
 # Service docker image labels
@@ -17,7 +17,7 @@ LABEL Description="Evaluation library docker service."
 WORKDIR	$EVALIB_HOME
 
 # Copy the service jar file and startup script.
-COPY evalib-startup.sh	evalib-server/docker .
+COPY evalib-startup.sh evalib-server/docker
 COPY evalib-web-admin-0.0.1-SNAPSHOT.jar evalib-server/evalib-web-admin/target	"./${EVALIB_JAR_FILE}"
 
 # Service will be running and listening on 80 port.
