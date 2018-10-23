@@ -2,6 +2,7 @@ import groovy.json.JsonOutput
 
 node {	
 	def dockerImage
+	def buildVersion="2018.1.0.${env.BUILD_NUMBER}"
 	
 	stage('checkout') {
 		checkout scm
@@ -18,7 +19,8 @@ node {
 	}
 	
 	stage('build-docker') {
-		dockerImage = docker.build("jamietao/evalib", "evalib-server/docker/")
+		echo "Build version:${buildVersion}"
+		dockerImage = docker.build("jamietao/evalib", "--build-arg BUILD_VERSION=${buildVersion} evalib-server/docker/")
 	}
 	
 	stage('test') {
@@ -26,9 +28,8 @@ node {
 	}
 	
 	stage('publish-docker') {
-		echo "${env.BUILD_NUMBER}"
 		docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-			dockerImage.push("${env.BUILD_NUMBER}")
+			dockerImage.push("${buildVersion}")
 			dockerImage.push("latest")
 		}
 	}

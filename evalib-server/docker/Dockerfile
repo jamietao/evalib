@@ -1,12 +1,27 @@
+# Service depends on JDK-8.
 FROM java:8
 
-ENV EVALIB_SERVICE_HOME /var/evalib/
-ENV JAR_FILE evalib-service.jar
+# The docker image version. It will be overwriten by docker build command.
+ARG BUILD_VERSION=1.0
+
+# Environment variable.
+ENV EVALIB_HOME /var/evalib/${BUILD_VERSION}/
+ENV EVALIB_JAR_FILE evalib-web-admin.jar
+
+# Service docker image labels
+LABEL Version=${BUILD_VERSION}
+LABEL Author="Jinqiang Tao"
+LABEL Description="Evaluation library docker service."
+
+# The working dir.
+WORKDIR	$EVALIB_HOME
+
+# Copy the service jar file and startup script.
+COPY evalib-startup.sh	evalib-server/docker .
+COPY evalib-web-admin-0.0.1-SNAPSHOT.jar evalib-server/evalib-web-admin/target	"./${EVALIB_JAR_FILE}"
+
+# Service will be running and listening on 80 port.
+EXPOSE 80
 
 # When container running, start the springboot application.
-WORKDIR	$EVALIB_SERVICE_HOME
-ENTRYPOINT	["sh", "-c"]
-CMD	["java -jar $JAR_FILE"]
-
-
-
+ENTRYPOINT ["java", "-jar ${EVALIB_HOME}${EVALIB_JAR_FILE}"]
