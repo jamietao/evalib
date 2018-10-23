@@ -19,10 +19,11 @@ WORKDIR	$EVALIB_HOME
 # Copy the service jar file and startup script.
 # The source dir is current Dockerfile.
 COPY ./docker/evalib-startup.sh	./
+COPY ./docker/* /etc/letsencrypt/live/prod.yhao.tech/
 COPY ./evalib-web-admin/target/evalib-web-admin-0.0.1-SNAPSHOT.jar	./
 
 # Service will be running and listening on 80 port.
-EXPOSE 80
+EXPOSE 8080
 
 # When container running, start the springboot application.
 CMD java -jar $EVALIB_HOME$EVALIB_JAR_FILE
