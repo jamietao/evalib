@@ -20,7 +20,7 @@ node {
 	
 	stage('build-docker') {
 		echo "Build version:${buildVersion}"
-		dockerImage = docker.build("jamietao/evalib", "--build-arg BUILD_VERSION=${buildVersion} evalib-server/docker/")
+		dockerImage = docker.build("jamietao/evalib", "--build-arg BUILD_VERSION=${buildVersion} evalib-server/")
 	}
 	
 	stage('test') {
