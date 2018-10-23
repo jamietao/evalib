@@ -25,4 +25,4 @@ COPY ./evalib-web-admin/target/evalib-web-admin-0.0.1-SNAPSHOT.jar	./
 EXPOSE 80
 
 # When container running, start the springboot application.
-ENTRYPOINT ["java", "-jar ${EVALIB_HOME}${EVALIB_JAR_FILE}"]
+CMD JAVA -jar $EVALIB_HOME$EVALIB_JAR_FILE
