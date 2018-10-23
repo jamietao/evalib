@@ -17,8 +17,8 @@ LABEL Description="Evaluation library docker service."
 WORKDIR	$EVALIB_HOME
 
 # Copy the service jar file and startup script.
-COPY evalib-startup.sh evalib-server/docker
-COPY evalib-web-admin-0.0.1-SNAPSHOT.jar evalib-server/evalib-web-admin/target
+COPY evalib-server/docker/evalib-startup.sh ./
+COPY evalib-server/evalib-web-admin/target/evalib-web-admin-0.0.1-SNAPSHOT.jar	./
 
 # Service will be running and listening on 80 port.
 EXPOSE 80
